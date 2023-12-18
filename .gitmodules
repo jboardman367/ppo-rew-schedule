@@ -1,0 +1,3 @@
+[submodule "rlgym-ppo"]
+	path = rlgym-ppo
+	url = git@github.com:jboardman367/rlgym-ppo.git

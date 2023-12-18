@@ -1,0 +1,2 @@
+RocketSim==2.0.0.post1
+rlgym-sim @ git+https://github.com/AechPro/rocket-league-gym-sim@main
