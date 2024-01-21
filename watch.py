@@ -1,5 +1,5 @@
 import os
-import time
+from time import sleep, perf_counter
 from bot import build_rlgym_v2_env
 import numpy as np
 
@@ -9,7 +9,7 @@ import torch
 env = build_rlgym_v2_env().rlgym_env
 obs = env.reset()
 # Make a policy
-policy_layer_sizes = (256, 256, 256)
+policy_layer_sizes = (512, 512, 512)
 
 device = 'cuda:0' # 'cuda:0' if torch.cuda.is_available() else 'cpu'
 print(f'Using device: {device}')
@@ -21,8 +21,10 @@ policy = DiscreteFF(
     device
 )
 
-checkpoint_folder: str = 'data\\v1-1705184981711988900'
-current_checkpoint: int = 0
+checkpoint_folder: str = 'purse_checkpoints\\v2.1'
+current_checkpoint: int = -1
+
+start = perf_counter()
 
 while(True):
     # Load most recent checkpoint
@@ -46,6 +48,5 @@ while(True):
 
         obs_dict, _, terminated_dict, truncated_dict = env.step(action_dict)
         done = list(terminated_dict.values())[0] or list(truncated_dict.values())[0]
-        # TODO: use timer in a way that accounts for computation time
-        time.sleep(8/120)
+        sleep((perf_counter() - start) % (8/120))
         env.render()
