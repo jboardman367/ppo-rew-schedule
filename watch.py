@@ -21,7 +21,7 @@ policy = DiscreteFF(
     device
 )
 
-checkpoint_folder: str = 'purse_checkpoints\\v2.1'
+checkpoint_folder: str = 'purse_checkpoints\\v3.0'
 current_checkpoint: int = -1
 
 start = perf_counter()
